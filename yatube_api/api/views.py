@@ -7,7 +7,7 @@ from rest_framework.permissions import (
 )
 
 from posts.models import Post, Group, Follow
-from .mixins import ReadCreateViewSet
+from .viewsets import ReadCreateViewSet
 from .serializers import (
     PostSerializer, GroupSerializer,
     CommentSerializer, FollowSerializer
