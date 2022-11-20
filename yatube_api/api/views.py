@@ -6,7 +6,7 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly, IsAuthenticated
 )
 
-from posts.models import Post, Group, Follow
+from posts.models import Post, Group
 from .viewsets import ReadCreateViewSet
 from .serializers import (
     PostSerializer, GroupSerializer,
@@ -55,7 +55,7 @@ class FollowViewSet(ReadCreateViewSet):
     search_fields = ('following__username', 'user__username')
 
     def get_queryset(self):
-        return Follow.objects.filter(user=self.request.user)
+        return self.request.user.follower.all()
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
